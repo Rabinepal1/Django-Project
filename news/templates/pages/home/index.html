@@ -1,0 +1,63 @@
+{% extends 'master/master.html' %}
+
+{% block content %}
+
+
+        <!-- Top News Start-->
+        <div class="top-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row tn-slider">
+                            {% for news in newsData %}
+                            <div class="col-md-6">
+                                <div class="tn-img">
+                                    {% if news.image %}
+                                    <img src="{{ news.image.url }}" height="500" alt="image not found" />
+                                    {% endif %}
+                                    <div class="tn-title">
+                                        <a href="{% url 'details' news.slug %}">{{ news.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top News End-->
+
+        <!-- Category News Start-->
+        <div class="cat-news">
+            <div class="container">
+                <div class="row">
+                    {% for category in categoryData %}
+                    <div class="col-md-6">
+                        <h2>{{ category.category_name }}</h2>
+                        <div class="row cn-slider">
+                            {% for blog in category.post_set.all %}
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    {% if blog.image %}
+                                    <img src="{{ blog.image.url }}" alt="image not found">
+                                    {% endif %}
+                                    <div class="cn-title">
+                                        <a href="{% url 'details' blog.slug %}">{{ blog.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Category News End-->
+
+        <!-- Footer Start -->
+
+
+{% endblock %}
